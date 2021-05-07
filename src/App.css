@@ -1,1 +1,67 @@
+.App {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+a {
+  text-decoration: none;
+}
+
+a:visited,
+a:link,
+a:active {
+  color: inherit;
+}
+
+.nav {
+  width: 100px;
+  margin: 40px 0 30px 0;
+  cursor: pointer;
+}
+
+.nav:active {
+  transform: scale(0.9);
+}
+
+.container {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.loading-msg {
+  display: flex;
+  height: 60vh;
+  font-size: 70px;
+  justify-content: center;
+  align-items: center;
+}
+
+.cats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  grid-auto-rows: 400px;
+  grid-gap: 30px;
+  justify-content: center;
+}
+
+.cat {
+  background-color: #c7c7c7d7;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cat img {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  margin-bottom: 35px;
+}
+
+.cat h1 {
+  text-align: center;
+}
