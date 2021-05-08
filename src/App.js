@@ -11,7 +11,7 @@ function App() {
       <HashRouter>
         <HomeNav></HomeNav>
         <Route path="/" exact={true} component={Home} />
-        <Route path="/cat/:id" component={Home} />
+        <Route path="/cat/:id" component={Detail} />
       </HashRouter>
     </div>
   );

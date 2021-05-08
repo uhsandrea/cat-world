@@ -5,7 +5,6 @@ class Home extends React.Component {
   state = {
     isLoading: true,
     cats: [],
-    array: []
   };
 
   getCats = async () => {
@@ -19,7 +18,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { isLoading, cats, array } = this.state;
+    const { isLoading, cats } = this.state;
     console.log(cats);
     return (
       <div className="container">
@@ -36,8 +35,6 @@ class Home extends React.Component {
                 temp={cat.temperament} 
                 life={cat.life_span} 
                 img={cat.image}
-                wikipedia={cat.wikipedia_url}
-                array={array}
               />
             ))}
           </div>

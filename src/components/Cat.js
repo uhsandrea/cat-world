@@ -1,41 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function Cat( { id, name, desc, img, temp, life, origin, wikipedia, array }) {
-  const [item, setItem] = useState("hi");
+// Some cats are missing image url in breeds list API. Had to get new image by searching specific breed id and update for those missing
 
-  function newImageArray(catId, imgUrl) {
-    const result = array.find(item => item.id === catId);
-    if (!result) {
-      array.push({id: catId, url: imgUrl});
+function Cat( { id, name, desc, img, temp, life, origin }) {
+  const [altImagesArray, setArray] = useState([]);
+  const [altImageUrl, setImage] = useState("");
+
+  function updateImage() {
+    const result = altImagesArray.find(item => item.id === id);
+    if (result) {
+      setImage(result.url);
+    }
+    else {
+      getNewImageData()
+        .then(data => {setArray([...altImagesArray, {id, url: data[0].url}]);
+          setImage(data[0].url)});
     } 
-    console.log(array);
-    const result2 = array.find(item => item.id === catId);
-    return result2.url;
   }
+
   function getNewImageData() {
-    console.log(name);
     return new Promise((resolve, reject) => {
       fetch(`https://api.thecatapi.com/v1/images/search?breed_id=${id}`)
         .then(response => response.json())
-        .then(data => newImageArray(id, data[0].url))
-        .then(result => resolve(result));
+        .then(data => resolve(data));
     })
   }
   
   useEffect(() => {
     if (!img || !img.url) {
-      getNewImageData().then(data => {
-        console.log(data);
-        setItem(data);
-      });
+      updateImage();
     }
-  })
+  });
+
   return (
-    <div className="cat">
-      <img src={(!img || !img.url) ? item : img.url} alt="Not Available" />
+    <Link className="cat"
+      to={{
+        pathname: `/cat/${id}`,
+        state: {
+          id, name, desc, img, temp, life, origin, altImageUrl
+        }
+      }}
+    >
+      <img src={(!img || !img.url) ? altImageUrl : img.url} alt="Not Available" />
       <h1>{name}</h1>
-    </div> 
+    </Link>
   );
 }
 
