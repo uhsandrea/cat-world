@@ -7,6 +7,14 @@ function Cat( { id, name, desc, img, temp, life, origin }) {
   const [altImagesArray, setArray] = useState([]);
   const [altImageUrl, setImage] = useState("");
 
+  function getNewImageData() {
+    return new Promise((resolve, reject) => {
+      fetch(`https://api.thecatapi.com/v1/images/search?breed_id=${id}`)
+        .then(response => response.json())
+        .then(data => resolve(data));
+    })
+  }
+
   function updateImage() {
     const result = altImagesArray.find(item => item.id === id);
     if (result) {
@@ -15,16 +23,8 @@ function Cat( { id, name, desc, img, temp, life, origin }) {
     else {
       getNewImageData()
         .then(data => {setArray([...altImagesArray, {id, url: data[0].url}]);
-          setImage(data[0].url)});
+        setImage(data[0].url)});
     } 
-  }
-
-  function getNewImageData() {
-    return new Promise((resolve, reject) => {
-      fetch(`https://api.thecatapi.com/v1/images/search?breed_id=${id}`)
-        .then(response => response.json())
-        .then(data => resolve(data));
-    })
   }
   
   useEffect(() => {

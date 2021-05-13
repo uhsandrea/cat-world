@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function HomeNav() {
   return (
-    <Link to="/"><img className="nav" src={cat} alt="Home"/></Link>
+    <Link to="/" replace><img className="nav" src={cat} alt="Home"/></Link>
   );
 }
 

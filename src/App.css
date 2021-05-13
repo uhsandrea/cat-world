@@ -71,7 +71,7 @@ a:active {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(250, 240, 220, 0.938);
+  background-color: #bebebed7;
   padding: 50px 0;
 }
 
